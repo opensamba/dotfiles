@@ -1,0 +1,76 @@
+# Author: samba
+# Description: Mutt Configuration file
+# Date: 2012-06.25 - Version: 0.1
+# info: https://wiki.archlinux.org/index.php/Mutt
+
+# Personal
+set realname = "s@mba"
+set use_from = yes
+set envelope_from ="yes"
+set attribution="%n wrote:"
+set signature="~/.mutt/signature"
+
+# SMTP
+set sendmail_wait=-1
+set sendmail="/usr/bin/msmtp"   
+set from = "samba@autistici.org"
+
+#FOLDERS 
+set mbox_type="maildir"
+set folder="$HOME/Mail/"      	# Local mailboxes stored here
+set spoolfile="+underscore"		# mutt folder startup
+set record="+sent"           	# Where to store sent messages
+set postponed="+draft"   		# Where to store draft messages
+#set move=no                  	# Don't move mail from spool
+
+#READING
+set quit=ask-yes
+set date_format="%F %T"
+set index_format="%4C %Z %-20{%F %T} %-15.15n (%?l?%4l&%4c?) %s"
+#set index_format="%4C %Z %-20{%F %T} %-15.15M (%?l?%4l&%4c?) %s"
+
+# HEADER
+#my_hdr X-Info: Keep It Simple, Stupid.
+## OS Info.
+#my_hdr X-Operating-System: `uname -s`, kernel `uname -r`
+## This header only appears to MS Outlook users
+#my_hdr X-Message-Flag: WARNING!! Outlook sucks!
+## Custom Mail-User-Agent ID.
+#my_hdr User-Agent: Every email client sucks, this one just sucks less :)
+
+set markers          # mark wrapped lines of text in the pager with a +
+set smart_wrap       # Don't wrap mid-word
+set pager_context=1  # Retain 5 lines of previous page when scrolling.
+set status_on_top    # Status bar on top.
+
+#================== SORT =====================#
+set sort=threads #default sort messages by thread
+set sort_aux=last-date-received # showing threads with youngest message last
+
+#WATCHERS 
+# Watch these mailboxes for new mail, useful only if 
+# Procmail or Maildrop is used to sort mail.
+#mailboxes ! +slrn +getmail +mutt
+set sort_browser=alpha    			# Sort mailboxes by alphabet
+#set sort_browser=reverse-date 		# showing mbox list default to newest first
+
+#EDITOR 
+set editor="vim -c 'set tw=70 et' '+/^$' " 
+set edit_headers=yes      # See the headers when editing
+
+# INCLUDE
+source $HOME/.mutt/color
+source $HOME/.mutt/ignore
+source $HOME/.mutt/keys 
+source $HOME/.mutt/folderhooks
+source $HOME/.mutt/crypto
+
+# MAILCAP
+set mailcap_path 	= ~/.mutt/mailcap
+# FORMAT VIEW
+auto_view text/html
+
+#ALIAS & LISTS
+alias underto _to <underscore_to@autistici.org>
+alias taz         <freetaz@artathack.me>
+lists underscore_to@autistici.org

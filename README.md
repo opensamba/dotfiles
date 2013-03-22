@@ -1,11 +1,8 @@
-dotfiles
-========
 
+script files
+========
 Di seguito ci sono alcuni miei script e file di configurazione
 La maggior parte degli script sono fatti per semplificarmi la vita e non digitare troppi comandi per le cose che faccio piu' spesso.
-
-I file di configurazione invece sono preferenze dopo anni di test e magari verranno ancora modificati per migliorarsi sempre di piu'.
-
 
 .bin/adatta :  manage fluxbox background
     - automatically resize background image to your resolution screen
@@ -37,7 +34,15 @@ I file di configurazione invece sono preferenze dopo anni di test e magari verra
     - open a file-manager in the song directory
     - if not specified open a terminal into the song directory
 
-=== CONF FILES ===
+conf files
+========
+
+I file di configurazione sono preferenze che, dopo anni di test, ho plasmato secondo quello che mi piace.
+sono un minimalista quindi mi piace molto usare il terminale e la tastiera per quasi tutto quello che faccio.
+
+Sicuramente non sono preferenze statiche ma cambiaranno e si miglioreranno nel tempo 
+a seconda di quello che devo fare.
+Di seguito una breve descrizione:
 
 .config/gtk-3.0/settings.ini
 .gtkrc-2.0

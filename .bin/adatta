@@ -1,0 +1,111 @@
+#!/bin/bash
+#Author: s@mba
+#Description Manage your fluxbox background
+BGPATH="$HOME/..."
+SIZE="1920x1080"
+MYFILE=$(cat ~/.fehbg | awk -F'center ' '{print $2}'| awk -F"'" '{print $2}' )
+ALTERDIR="~/.she/" # my secret folder for human beauty
+VERBOSE=0
+
+usage(){
+	if [ $# -ne 0 ];then
+		echo "$@"
+	else
+		echo "$0: Usage
+		manage the background image
+		-a|--adapt		By default resize the img in 1600x900
+		-f|--flop 		Flip the imgage orizzontally
+		-d|--delete		Delete your img and change background
+		-m|--move 		Move to another directory (es ~/.she/) the img
+		-r|--rename		Rename this img and reload
+		-v|--verbose	Please tell everything you do
+		"
+	fi
+	exit 1
+}
+flop_img(){
+	echo "Flop imgs: $MYFILE ..."
+	backup_img
+	convert -flop "$MYFILE" "$MYFILE"
+	reload_img
+	exit 
+}
+backup_img(){
+	[ $VERBOSE -eq 1 ] && echo "copy $MYFILE in /tmp/$MYFILE.bck"
+	NAME=$(basename "$MYFILE")
+	cp "$MYFILE" "/tmp/$NAME"
+}
+
+adapt_img(){
+	echo -n "Adapting.."
+	backup_img
+	convert -resize 1600x900 "$MYFILE" "$MYFILE"
+	reload_img
+	echo "ok"
+	exit
+}
+delete_img(){
+	echo "Deleting: $MYFILE.."
+	backup_img
+	echo -n "Are you sure you want to delete $MYFILE [Y/n]:"
+	read res
+	case $res in nN) echo "ok, quit"; exit; esac
+	rm -fv $MYFILE
+	reload_img -n
+	exit
+}
+move_img(){
+	echo -n "Move $MYFILE from $MYDIR to $ALTERDIR ..."
+	backup_img
+	MYDIR=$(dirname "$MYFILE")
+	NEWFILE="${ALTERDIR}/${NEWNAME}"
+	mv -vi "$MYFILE" "$NEWFILE"
+	reload_img -n
+	echo "ok"
+	exit
+}
+rename_img(){
+	echo "Rename $MYFILE"
+	backup_img
+	echo -n "Insert the new file name: "
+	read NEWNAME
+	echo "NEW NAME: $NEWNAME"
+	MYDIR=$(dirname "$MYFILE")
+	echo "MYDIR: $MYDIR"
+	NEWFILE="${MYDIR}/${NEWNAME}"
+	echo "NEWFILE : $NEWFILE"
+	mv -vi "$MYFILE" "$NEWFILE"
+	reload_img -n
+	exit
+}
+reload_img(){
+	if [ "$1" = "-n" ];then
+		fbsetbg -a -c -r $BGPATH
+	else
+		bash ~/.fehbg
+	fi
+}
+
+while [ $# -ne 0 ];do
+	case $1 in
+		-a|--adapt)	ADAPT=1; 
+			;;
+		-f|--flop)		flop_img
+			;;
+		-d|--delete)	delete_img
+			;;
+		-m|--move)		move_img
+			;;
+		-r|--rename)	rename_img
+			;;
+		-v|--vebose)	VERBOSE=1
+			;;
+		*)		usage
+			;;
+	esac
+	shift
+done
+
+[ ! -f "$MYFILE" ]  && usage "\"$MYFILE\" dont exist"
+adapt_img
+

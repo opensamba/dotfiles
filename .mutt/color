@@ -1,0 +1,82 @@
+## GENERAL
+color attachment  white         default
+color bold        green         default 
+color error       red           default
+color indicator   green    		default # index
+color markers     red           default # index
+color message     black         default
+color signature	  cyan 			default
+color status      white         blue
+color tilde       blue          default # pager body
+color tree        blue	        default # index
+color underline   yellow        blue
+
+## HEADER
+
+color header      brightgreen	black		"^From: "
+color header      yellow		default	"^Subject: "
+color header      white			default  "^To: "
+color header      white			default  "^(Cc|Bcc): "
+color header      white			default  "^.*Date: "
+color header      white			default  "^Reply-to: "
+color header      white			default  "^(User-Agent|X-Originating-IP|X-Mailer): "
+color header      white			default  "^Organization: "
+color header      white			default  "^X-Spam.*: "
+
+## QUOTE
+color normal      white       	default  # pager body
+color quoted 	  brightcyan 	default
+color quoted1     cyan 			default
+color quoted2     green			default
+color quoted3     brightgreen	default
+color quoted4     brightblue	default
+color quoted5     brightmagenta	default
+color quoted6     magenta		default
+color quoted7     brightred		default
+
+# SMILES
+color body        yellow       default   "[;:][-]?[)/(|>\\]+"
+#color body       yellow       default   "[;:][)/(|>\\]"
+
+## FILTERS
+color index      yellow  		default ~N 	# New mail
+color index      cyan        	default ~T 	# Tagged
+color index      blue			default  ~D # Deleted
+#color index      default       default ~R
+#color index      default   	default ~O # Old
+#color index      default 		default '~N (~L @.*debian)'
+#color index      default 		default  ~F # Flagged
+
+## INTERFACE 
+color	hdrdefault		cyan default
+color	indicator 		brightyellow red
+color	error 			brightred default
+color	status			yellow blue
+color	tree 			brightcyan default	# the thread tree in the index menu
+color	tilde 			cyan default
+color 	message		  	brightcyan default
+color 	markers		  	brightcyan default
+color 	attachment		white  default
+color 	search default 	green	# how to hilite search patterns in the pager
+
+## LINKS  ftp/http 
+color body				magenta 	default "(ftp|http|https)://[^ ]+"	# point out URLs
+color body				green   	default   "(f|ht)tps?://[^ ]*"
+color body				magenta		default  [-a-z_0-9.]+@[-a-z_0-9.]+	# e-mail addresses
+color body				brightgreen	default  "[[:alnum:]][-+.#_[:alnum:]]*@[-+.[:alnum:]]*[[:alnum:]]"
+color underline 		brightgreen default
+
+
+## GPG 
+color body blue 		black '.*PGP output.*'
+color body green 		black '^gpg: .*'
+color body yellow 		black '^\[GNUPG:] SIG_ID.*'
+color body brightgreen 	black '^\[GNUPG:] GOODSIG.*'
+color body brightyellow black '^\[GNUPG:] SIGEXPIRED.*'
+color body yellow 		black '^\[GNUPG:] (KEYREVOKED|BADSIG|ERRSIG|BADARMOR).*'
+color body brightgreen 	black '^\[GNUPG:] VALIDSIG.*'
+color body brightgreen 	black '^\[GNUPG:] TRUST_(ULTIMATE|FULLY)'
+color body brightyellow black '^\[GNUPG:] TRUST_(MARGINAL|UNDEFINED)'
+color body brightyellow black '^\[GNUPG:] TRUST_UNDEFINED'
+color body brightred 	black '^\[GNUPG:] TRUST_NEVER'
+color body yellow 		black '^\[GNUPG:]'

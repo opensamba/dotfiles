@@ -1,0 +1,51 @@
+#!/bin/bash
+# Author: samba
+# Description: check the mail with getmail and notify using the procmail log
+DELAY=900
+COUNT=0
+usage(){
+	echo "$0: usage
+	-c|-check	After c checks, exit (default infinite)
+	-d|-delay	Set the sleep time (default:$DELAY)
+	-h|-help	Print this help"
+}
+
+notify() {
+  PMLOG="$HOME/.pmlog"
+  if [ -f "$PMLOG" ]; then
+    MSG="$(cat $PMLOG | mailstat -t && mv $PMLOG $PMLOG.old)"
+    if [ -n "$MSG" ]; then
+	  echo "New mail: $MSG"
+      notify-send -t 50000 -c email.arrived -i "/usr/share/icons/Neu/scalable/apps/email.svg" "New mail" "$MSG"
+	else
+		echo "No new mail"
+    fi
+  fi
+}
+while [ $# -ne 0 ];do
+	case $1 in
+		-c)	COUNT=$2; shift ;;
+		-d)	DELAY=$2; shift ;;
+		*)	usage ;;
+	esac
+	shift
+done
+
+while true; do
+ # $HOME/.bin/msmtp-runqueue.sh
+  echo -e "\nChecking..."
+  getmail -q --rcfile getmailrc &
+  wait
+  ping -c 1 8.8.8.8 2>&1 > /dev/null
+  if [ $? ];then
+    notify
+  else
+    echo "Offline -- not checked."
+	DELAY=60
+  fi
+  [ $COUNT -eq 1 ] && exit || COUNT=$(($COUNT-q))
+  echo Next check at $(date -d "$DELAY seconds" '+%F %T...')
+  sleep $DELAY;
+  DELAY=900
+done
+

@@ -1,0 +1,61 @@
+# Config reload
+#bind	generic	\C<backspace>	"source $alias_file" "reload conf"
+macro	generic	.	":source $alias_file" "reload conf" 
+macro	index	.	":source $alias_file" "reload conf" 
+macro	pager	.	":source $alias_file" "reload conf" 
+
+# Change folders
+macro 	index 	<backspace> 	"<change-folder>?"	"back"
+macro	pager	<backspace>		<exit>
+
+# Go to
+bind pager n 		next-unread
+bind index <right>	display-message
+
+# WRITING
+bind  index    a	group-reply
+
+
+# Reading
+macro pager \cu "|urlview &\n"  'Follow links with urlview'
+bind index \cv next-page
+bind pager  _	mark-as-new
+# find
+bind pager	n	search-next
+bind pager	N	search-opposite
+
+# getmail
+macro index G "!~/.bin/mailcheck -c 1 &<enter><enter>" 'Getmail'
+
+bind  pager   <up>     previous-line
+bind  pager   <down>   next-line
+bind  pager   <left>   exit
+bind  pager   <right>  view-attachments
+bind  attach  <left>   exit
+bind  attach  <right>  view-attach
+bind  browser <right>  select-entry
+bind  browser <left>   exit
+
+bind editor    \cn      history-down
+bind editor    \cp      history-up
+bind editor    "\e<delete>"    kill-word
+bind editor    "\e<backspace>" kill-word
+
+#map delete-char to a sane value
+#bind editor     <delete>  delete-char
+
+# weed out binary-only announcements to -devel-changes
+#macro index \CW T!~s\(.*source.*\)\nWn^T~A\n "Weed out binary-only announcements"
+
+# Show documentation when pressing F1
+macro generic <f12> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
+#macro index   <f12> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
+#macro pager   <f12> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
+
+# SPAM http://wiki.mutt.org/?action=browse&diff=3&id=MuttGuide/SpamAssassin
+spam "X-Spam-Status: Yes"		"90+/SA"
+#macro index  S "| spamassassin -r\nd" "Report message to Vipul's Razor"
+#message-hook H          "ignore X-Spam-Status"
+#macro pager S "<save-message>=inbox/Spam/Verified<enter>" "file as Spam"
+#macro index H "<tag-prefix><enter-command>unset resolve<enter><tag-prefix><clear-flag>N<tag-prefix><enter-command>set resolve<enter><tag-prefix><save-message>=inbox/Spam/Ham<enter>" "file as Ham"
+#macro pager H "<save-message>=inbox/Spam/Ham<enter>" "file as Ham"

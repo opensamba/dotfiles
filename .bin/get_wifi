@@ -1,0 +1,24 @@
+#!/bin/bash
+# uno script per tirare su il wifi
+
+#1. accendo il wifi
+sudo ip link set wlan0 up
+#2. verifico che ci sia Hope
+AT_HOME=$(sudo iwlist wlan0 scan | grep -i essid | grep -c "Hope")
+AT_WORK=$(sudo iwlist wlan0 scan | grep -i essid | grep -c "Skylogic_Staff")
+
+if [ $AT_HOME -ne 0 ];then
+	WPA_FILE=/etc/wpa_supplicant_hope.conf
+fi
+if [ $AT_WORK -ne 0 ];then
+	WPA_FILE=/etc/wpa_supplicant_work.conf
+fi
+
+echo -n "WPA_SUPPLICANT: "
+sudo wpa_supplicant -Dwext -iwlan0 -c$WPA_FILE -B && echo "OK" || (echo "KO" ; exit 1)
+sudo iwconfig wlan0
+read
+echo -n "DHCP: "
+sudo dhcpd wlan0 && (echo "KO" ; exit 1)
+
+ping -c 3  8.8.8.8

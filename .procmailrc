@@ -1,0 +1,38 @@
+# Please check if all the paths in PATH are reachable, remove the ones that
+# are not.
+
+PATH=$HOME/.bin:/usr/bin:/bin:/usr/local/bin:.
+MAILDIR=$HOME/Mail
+DEFAULT=$MAILDIR/inbox
+LOGFILE=$HOME/.pmlog
+LOCKFILE=$MAILDIR/.lockmail
+
+:0
+* ^TO_freetaz@artathack.me
+taz/
+
+:0
+* ^(From).*underscore_to-bounces@.*
+admin/
+
+:0
+* ^TO_hackmeeting@inventati.org
+hackmeeting/
+
+:0
+* ^TO_underscore_to@autistici.org
+underscore/
+
+:0
+* ^TO_ml@sikurezza.org
+sikurezza/
+
+:0fw:spamassassin.lock
+| /usr/bin/spamc
+:0:spamassassin2.lock
+* ^X-Spam-Status: Yes
+spam/
+
+:0
+* 
+inbox/

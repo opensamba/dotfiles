@@ -1,0 +1,91 @@
+#!/bin/bash
+#Author: s@mba
+#Description: Manage your song, rename, delete add info
+MUSICPATH="$HOME/Music"
+VERBOSE=0
+
+usage(){
+	if [ $# -ne 0 ];then
+		echo "$@"
+	else
+		echo "$0: Usage
+		manage the music file
+		-o|--open		open file manager in this directory
+		-t|--term 		open a terminal in filename dir
+		-d|--delete		Delete this song
+		-r|--rate N		Rate your song [1-5] 
+		-R|--rename		Rename this sond with eyeD3 [%a - %t]
+		-c|--convert	Convert your file in MP3 format
+		-v|--verbose	Please tell everything you do
+		"
+	fi
+	exit 1
+}
+get_filename(){
+	NAME=$(ncmpcpp --now-playing '%f')
+	FILENAME=$(locate "$NAME")
+	[ ! -f "$FILENAME" ] && usage "$FILENAME not exist!"
+	echo $FILENAME
+}
+
+backup(){
+	[ $VERBOSE -eq 1 ] && echo "copy $MYFILE in /tmp/$MYFILE.bck"
+	NAME=$(basename "$MYFILE")
+	cp "$MYFILE" "/tmp/$NAME"
+}
+
+open_fm(){
+	DIR=$(dirname "$MYFILE")
+	echo "Opening xterm in $DIR"
+	exo-open --working-directory "$DIR" --launch FileManager
+	exit
+}
+open_term(){
+	DIR=$(dirname "$MYFILE")
+	echo -n "Opening xterm in $DIR"
+	exo-open --working-directory "$DIR" --launch TerminalEmulator
+}
+
+delete(){
+	echo "Deleting: $MYFILE.."
+	backup_img
+	echo -n "Are you sure you want to delete $MYFILE [Y/n]:"
+	read res
+	case $res in nN) echo "ok, quit"; exit; esac
+	rm -fv $MYFILE
+	exit
+}
+rename(){
+	echo "Rename $MYFILE"
+	backup_img
+	echo -n "Insert the new file name: "
+	read NEWNAME
+	echo "NEW NAME: $NEWNAME"
+	MYDIR=$(dirname "$MYFILE")
+	echo "MYDIR: $MYDIR"
+	NEWFILE="${MYDIR}/${NEWNAME}"
+	echo "NEWFILE : $NEWFILE"
+	mv -vi "$MYFILE" "$NEWFILE"
+	exit
+}
+MYFILE=$(get_filename)
+while [ $# -ne 0 ];do
+	case $1 in
+		-o|--open)		open_fm
+			;;
+		-t|--term)		open_term
+			;;
+		-d|--delete)	delete
+			;;
+		-r|--rename)	rename
+			;;
+		-v|--vebose)	VERBOSE=1
+			;;
+		*)		usage
+			;;
+	esac
+	shift
+done
+
+[ ! -f "$MYFILE" ]  && usage "\"$MYFILE\" dont exist"
+open_term

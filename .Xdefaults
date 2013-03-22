@@ -1,0 +1,36 @@
+!XTerm*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
+*customization: -color
+XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+XTerm*altSendsEscape: false
+XTerm*background: black
+XTerm*bellIsUrgent: true
+XTerm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48,35:48,58:48,63:48,61:48,44:48,38:48,59:48
+XTerm*colorBD: khaki
+XTerm*colorBDMode: true
+XTerm*colorUL: tomato
+XTerm*colorULMode: true
+XTerm*cursorColor: darkorange1
+XTerm*cutNewline: false
+XTerm*eightBitControl: false
+XTerm*eightBitInput: true
+XTerm*externalBorder: 0
+XTerm*faceName: xft:Dejavu Sans Mono:pixelsize=13
+XTerm*faceSize: 14
+!XTerm*foreground: grey75
+XTerm*foreground: lightgrey
+XTerm*fullscreen: never
+XTerm*highlightSelection: true
+XTerm*metaSendsEscape: true
+XTerm*omitTranslation: fullscreen
+XTerm*on2Clicks: word
+XTerm*on3Clicks: regex [^ \n<>]+
+XTerm*on4Clicks: line
+XTerm*on5Clicks: all
+XTerm*saveLines: 100000
+XTerm*scrollBar: false
+XTerm*showBlinkAsBold: true
+XTerm*termName: xterm
+XTerm*trimSelection: true
+XTerm*utf8: 1
+XTerm.VT100.geometry: 80x26
+XTerm.eightBitOutput: true

@@ -1,0 +1,69 @@
+# General
+mpd_host = "127.0.0.1"
+mpd_port = "6600"
+#mpd_socket = "/var/lib/mpd/socket"
+mpd_music_dir = "/home/samba/Music"
+ncmpcpp_directory = "~/.ncmpcpp"
+lyrics_directory = "~/.lyrics"
+mpd_connection_timeout = "5"
+mpd_communication_mode = "notifications" #polling/notifications
+
+# Navig
+jump_to_now_playing_song_at_start = "yes"
+playlist_disable_highlight_delay = "3"
+message_delay_time = "4"
+mpd_crossfade_time = "0"
+
+# Formatting
+media_library_display_date = "yes"
+enable_window_title = "yes"
+song_list_format = "{%a - }{%t}$R{(%l)}"
+song_library_format = "{%n - }{%t}|{%f}"
+tag_editor_album_format = "{%y }%b"
+browser_playlist_prefix = "$2playlist$9 "
+selected_item_prefix = "$1"
+selected_item_suffix = "$9"
+
+# colors are not supported for below veriables
+song_status_format = "%t{ by %a}{ from %b}{ (%y)}"
+song_window_title_format = "MPD: {%a - }{%t}|{%f}"
+song_columns_list_format = "(7)[cyan]{l} (28)[cyan]{a} (28)[]{b} (50)[cyan]{t}"
+#song_columns_list_format = "(7f)[]{l} (25)[cyan]{a} (40)[green]{t|f} (30)[red]{b}"
+browser_display_mode = "columns" # classic/columns
+search_engine_display_mode = "classic"
+
+# Colors - Yes, I really like the way cyan looks on here.
+
+colors_enabled = "yes"
+main_window_color = "cyan"
+main_window_highlight_color = "cyan"
+header_window_color = "green"
+volume_color = "cyan"
+progressbar_color = "red"
+statusbar_color = "green"
+color1 = "cyan"
+color2 = "cyan"
+active_column_color = "red"
+active_window_border = "blue"
+
+# Configuration
+
+header_visibility = "yes"
+statusbar_visibility = "yes"
+header_text_scrolling = "yes"
+fancy_scrolling = "no"
+cyclic_scrolling = "yes"
+ignore_leading_the = "no"
+block_search_constraints_change_if_items_found = "yes"
+mouse_support = "yes"
+enable_window_title = "yes"
+lyrics_database = "1"
+external_editor = "vim"
+use_console_editor = "yes"
+default_space_mode = "add"
+display_screens_numbers_on_start = "no"
+clock_display_seconds = "yes"
+# Del
+allow_physical_files_deletion = "yes"
+allow_physical_directories_deletion = "yes"
+

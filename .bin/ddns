@@ -1,0 +1,99 @@
+#!/usr/bin/python
+# Author: samba
+# Description: Easy DNS Changer
+# License GPLv3
+import argparse, sys
+
+def get_gw():
+	import commands
+	gw = commands.getoutput("route -n | tail -1 | awk '{print $2}'")
+	if opt.verbose:
+		print "GW = ", gw
+	return gw
+
+def dns_setup(ns1,ns2,dnsfile=None):
+	if dnsfile == None:
+		dnsfile = "/etc/resolv.conf"
+	import commands
+	ns3 = "8.8.4.4"
+	mystring = """'# DNS auto-changer by %s
+nameserver %s
+nameserver %s
+nameserver %s
+# End auto-changer setup' """ % (sys.argv[0], ns1, ns2, ns3 ) 
+	cmd = 'echo ' + mystring + ' | sudo tee %s ' % ( dnsfile )
+	if opt.verbose:
+		print "cmd :"
+		print cmd
+	rs, outxt = commands.getstatusoutput(cmd)
+	if rs<0:
+		print "[ERROR]:\tSome error occurred"
+	else:
+		print "[OK]: New  DNS = ", opt.dns
+
+def dns_show(dnsfile=None):
+	if dnsfile == None:
+		dnsfile = "/etc/resolv.conf"
+	with open(dnsfile,"r") as f:
+		for line in f:
+			print line,
+
+p = argparse.ArgumentParser()
+p.add_argument("dns",help="Set the type of DNS to change")
+p.add_argument("-s","--show",action="store_true",help="Show resolv.conf")
+p.add_argument("-v","--verbose",action="count",help="Set verbosity")
+opt = p.parse_args()
+if len(sys.argv) == 1:
+	p.print_help()
+	sys.exit()
+
+if opt.dns:
+	if opt.verbose:
+		print opt.dns
+	dns = opt.dns
+	if dns == "show":
+		dns_show()
+		sys.exit()
+	
+	if dns == "work":			# WORK DNS 
+		ns1="172.20.23.1"
+		ns2="172.20.23.2"
+	if dns == "home":
+		ns1="8.8.8.8"
+		ns2="192.168.1.254"
+
+	if dns == "open":	
+		ns1="8.8.8.8"			# GOOGLE
+		ns2="4.2.2.2"			# LEVEL3
+
+	if dns in ("open2","opendns"):
+		ns1="208.67.222.222"	# OPENDNS
+		ns2="208.67.220.220"
+	
+	if dns == "libero":			#LIBERO ISP
+		ns1="193.70.192.100"
+		ns2="195.210.91.10"
+	
+	if dns == "fastweb":		# Fastweb ISP
+		ns1="213.140.2.12"
+		ns2="213.140.2.21"
+	
+	if dns == "netstudent":		# Netstudent
+		ns1=""
+	
+	if dns == "normal":			# LAN_1
+		ns1="192.168.1.1"
+	
+	if dns == "normal0":		# LAN_0
+		ns1="192.168.0.1"
+	
+	if dns == "gw":				# LAN dynamic
+		ns1=get_gw()
+	
+	if ns2 == None:				# if no nameserver2
+		ns2="8.8.8.8"			# then set google
+	dns_setup(ns1,ns2)			# write in /etc/resolv.conf
+	
+	if opt.verbose:
+		dns_show()				# show me /etc/resolv.conf
+

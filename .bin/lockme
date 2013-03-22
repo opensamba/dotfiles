@@ -1,0 +1,8 @@
+#!/bin/bash
+#Author: samba
+#Description: lock the system and stop some stuff
+
+#pidof rhythmbox && rhythmbox-client --pause &
+ncmpcpp pause
+xscreensaver-command -lock &
+exit 0

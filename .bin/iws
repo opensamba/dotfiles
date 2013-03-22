@@ -1,0 +1,77 @@
+#!/bin/bash
+SCANFILE=/tmp/scanfile.txt
+
+usage(){
+	echo  "
+Usage $0: scan wifi networks
+		help		Display this help 
+		auth		Display ESSID and auth
+		quality		Display ESSID and quality
+		chan		Display ESSID and chan
+
+		Example:
+		$(basename $0) 	-c 5 		scan s 5 times
+		$(basename $0) 	-c 5 -n 2	scan ESSID 5 times each 2 seconds
+		$(basename $0) 	c 		scan Channel 
+		--view	Scan only 1 time"
+	exit 0
+}
+addfilter(){
+	[ $# -ne 1 ] && usage
+	echo "Aggiungo nuovo filtro: $1"
+	NEWFILTER=$1
+	FILTER=$(printf "%s|%s" $FILTER $NEWFILTER)
+	echo "Filtro aggiornato: $FILTER"
+}
+
+FILTER="ESSID"
+IF="wlan0"
+DELAY=1
+COUNT=1
+SETCOUNT=0
+while [ $# -ne 0 ];do
+echo "Args: $@"
+	case $1 in
+		auth|a)
+			addfilter Auth
+		;;
+		key|enc|k|e)
+			addfilter Enc
+		;;
+		qual|Q|q)
+			addfilter Qual
+		;;
+		Chan|chan|c)
+			addfilter Channel
+		;;
+		[0-9]*)
+			if [ $SETCOUNT -ne 1 ];then
+				SETCOUNT=1
+				COUNT=$1
+				echo "Imposto il count a $COUNT"
+			else if [ $SETCOUNT -eq 1 ];then
+				DELAY=$1
+				SETCOUNT=2
+				echo "Imposto il delay a $DELAY"
+			     fi
+			fi
+		;;
+#		-c|count)	[ $# -lt 2 ] && usage ; COUNT=$2 && shift 
+#		;;
+#		-t|time)	[ $# -lt 2 ] && usage ; DELAY=$2 && shift 
+#		;;
+
+		h|-h|-help)
+			usage
+		;;
+		*)
+		;;
+	esac
+	shift
+done
+for i in $(seq $COUNT);do
+	#sudo iwlist eth1 scan | grep -E "'"$FILTER"'"
+	sudo iwlist $IF scan | grep -E $FILTER | uniq
+	sleep $DELAY
+done
+exit 0

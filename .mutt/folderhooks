@@ -1,0 +1,21 @@
+# folder-hook '.' "set sort=threads ; exec collapse-all"
+# folder-hook = "set sort=date ; push *"
+
+# folder-hook "INBOX" set sort=threads
+# folder-hook "INBOX" exec collapse-all
+# folder-hook "=." set sort=date
+# folder-hook "=." push *
+
+#folder-hook "INBOX$" "set sort=threads ; exec collapse-all"
+#folder-hook "/$" "set sort=threads ; exec collapse-all"
+#folder-hook !"(INBOX|/)$" "set sort=date ; push *"
+#
+
+#INBOX
+folder-hook inbox  		'push "<limit>~N|~O|~d <3d<enter>"'
+#folder-hook inbox		set sort=date threads
+
+# LISTS
+folder-hook underscore  'push "<limit>~N|~O|~d <1w<enter>"'
+folder-hook hackmeeting 'push "<limit>~N|~O|~d <1w<enter>"'
+
