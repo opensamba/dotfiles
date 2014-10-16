@@ -2,9 +2,9 @@
 #Author: s@mba
 #Description Manage your fluxbox background
 BGPATH="$HOME/..."
-SIZE="1920x1080"
+SIZE="1600x900"
 MYFILE=$(cat ~/.fehbg | awk -F'center ' '{print $2}'| awk -F"'" '{print $2}' )
-ALTERDIR="~/.she/" # my secret folder for human beauty
+ALTERDIR="$HOME/...." # my secret folder for human beauty
 VERBOSE=0
 
 usage(){
@@ -16,7 +16,7 @@ usage(){
 		-a|--adapt		By default resize the img in 1600x900
 		-f|--flop 		Flip the imgage orizzontally
 		-d|--delete		Delete your img and change background
-		-m|--move 		Move to another directory (es ~/.she/) the img
+		-m|--move 		Move to another directory (es ~/.secretdir/) the img
 		-r|--rename		Rename this img and reload
 		-v|--verbose	Please tell everything you do
 		"
@@ -49,9 +49,15 @@ delete_img(){
 	backup_img
 	echo -n "Are you sure you want to delete $MYFILE [Y/n]:"
 	read res
-	case $res in nN) echo "ok, quit"; exit; esac
-	rm -fv $MYFILE
-	reload_img -n
+	case $res in 
+		""|"Y"|"y")
+			echo rm -fv "$MYFILE"
+			rm -fv "$MYFILE"
+			reload_img -n 
+			;;
+		*)
+			echo "skip"
+	esac	
 	exit
 }
 move_img(){

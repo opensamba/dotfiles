@@ -1,64 +1,59 @@
 # Based on conky-jc and the default .conkyrc.
+# INCLUDES:
+# - tail of /var/log/messages
+# - netstat connections to your computer
+# - CPU check monitor
+# - MEM usage monitor
+# - NET check wiki/LAN
+# -- Pengo (conky@pengo.us)
+#
+
 # Create own window instead of using desktop (required in nautilus)
 own_window yes
 own_window_type override
-own_window_hints below
+#own_window_hints below
+#own_window_colour fff000
+#own_window_transparent yes
+#own_window_argb_visual yes
+#own_window_argb_value 15
 
-# Use double buffering (reduces flicker, may not work for everyone)
-#double_buffer yes
-
-# fiddle with window
-use_spacer left
-use_xft no
+maximum_width 200
+draw_shades no
+use_spacer left 
 
 # Update interval in seconds
 update_interval 3.0
+update_interval_on_battery 10.0
 
 # GiB -> G
 short_units
-#Maximum Width of Window
-maximum_width 250
-
-# Minimum size of text area
-# minimum_size 250 5
-
-# Draw shades?
-draw_shades no
 
 # Text stuff
-draw_outline no # amplifies text if yes
+draw_outline no 
 draw_borders no
-uppercase no # set to yes if you want all text to be in uppercase
+uppercase no 
 
 # Stippled borders?
 stippled_borders 3
-
-# which Font ?
-use_xft yes
-#xftfont saxMono:size=8
-## xftfont PetitaMedium:size=8
-xftfont Bitstream Vera Sans:size=9
-# xftfont 123:size=8
-
-# border margins
 border_inner_margin 2
 border_outer_margin 5
 
+# which Font ?
+use_xft yes
+xftfont Ubuntu mono:size=7
+
 # border width
-border_width 2
+border_width 1
 
 # Default colors and also border colors, grey90 == #e5e5e5
 default_color FFFFCC
-
-#own_window_colour black
-#own_window_transparent yes
-own_window_argb_visual yes
-own_window_argb_value 180
-
+color1 green
+color2 CC9900
+color3 CC8800
+color4 597DB2
 # Text alignment, other possible values are commented
 #alignment top_left
-alignment top_right
-#alignment bottom_right
+alignment bottom_right
 #alignment bottom_left
 #alignment bottom_right
 
@@ -66,64 +61,64 @@ alignment top_right
 gap_x 10
 gap_y 10
 
-#mpd_host localhost
 # stuff after ‘TEXT’ will be formatted on screen
 
 TEXT
 $color
-${color CC9900}SYSTEM ${hr 2}$color
-${offset 10}${color slate grey}HOST: ${color }$nodename
-${offset 10}${color slate grey}KERN: ${color }$sysname $kernel
-${color CC9900}MUSIC ${hr 2}$color
-${offset 10}${color slate grey}MPD: ${color }$mpd_status - $mpd_vol%
-${offset 10}${color slate grey}Song: ${color }$mpd_smart
-
+#${color CC9900}SYSTEMS ${hr 2}$color
+$color2 SYSTEM ${hr 2}
+${offset 10}${color green}HOST: ${color }$nodename
+${offset 10}${color green}KERN: ${color }$sysname $kernel
+${offset 10}${color green}Batt: ${color }${battery_bar BAT0} 
+${offset 10}${color green}Status: ${color}${battery BAT0} 
+${offset 10}${color green}Time: ${color }${battery_time BAT0}
 ${color CC9900}CPU ${hr 2}$color
-
-Total CPU: ${cpu cpu0}%
-${color 0970B2}${cpubar}$color
-${cpugraph 000000 597DB2}
+Total CPU: 
+${cpu cpu0}% $color1 ${cpubar cpu0} 
+${loadgraph CD0000 CE00000}
 #${cpugraph CC0000 CC00000}
-CPU_0: $color ${exec sensors|grep 'temp1:'|awk '{print $2}'} | ${cpu cpu0}% ${color 597DB2} ${cpubar cpu0} 
-CPU_1: $color ${exec sensors|grep 'temp1:'|awk '{print $2}'} | ${cpu cpu1}% ${color 597DB2} ${cpubar cpu1} 
-CPU_2: $color ${exec sensors|grep 'temp1:'|awk '{print $2}'} | ${cpu cpu2}% ${color 597DB2} ${cpubar cpu2} 
-CPU_3: $color ${exec sensors|grep 'temp1:'|awk '{print $2}'} | ${cpu cpu3}% ${color 597DB2} ${cpubar cpu3} 
-CPU_4: $color ${exec sensors|grep 'temp1:'|awk '{print $2}'} | ${cpu cpu4}% ${color 597DB2} ${cpubar cpu4} 
-CPU_5: $color ${exec sensors|grep 'temp1:'|awk '{print $2}'} | ${cpu cpu5}% ${color 597DB2} ${cpubar cpu5} 
-CPU_6: $color ${exec sensors|grep 'temp1:'|awk '{print $2}'} | ${cpu cpu6}% ${color 597DB2} ${cpubar cpu6} 
-CPU_7: $color ${exec sensors|grep 'temp1:'|awk '{print $2}'} | ${cpu cpu7}% ${color 597DB2} ${cpubar cpu7} 
+#$color4 ${cpugraph ${color}$color1 -t} $color
+$color Cores: ${freq_g 1}GHz $alignr temp: ${acpitemp} C°
+${cpu cpu1}% ${color 597DB2}${cpubar cpu1}$color
+${cpu cpu2}% ${color 597DB2}${cpubar cpu2}$color
+${cpu cpu3}% ${color 597DB2}${cpubar cpu3}$color
+${cpu cpu4}% ${color 597DB2}${cpubar cpu4}$color
 
-${color CC9900}NAME $alignr PID	 CPU%  	MEM%$color
-${color white}${top name 1} $alignr${top pid 1} ${top cpu 1} ${top mem 1}$color
-${color grey}${top name 2} $alignr${top pid 2} ${top cpu 2} ${top mem 2}
-${color grey}${top name 3} $alignr${top pid 3} ${top cpu 3} ${top mem 3}
-${color grey}${top name 4} $alignr${top pid 4} ${top cpu 4} ${top mem 4}$color
-${color grey}${top name 5} $alignr${top pid 5} ${top cpu 5} ${top mem 5}$color
+${color2} ${hr 2} $color
+${color3}CPU PROC $alignr     PID    CPU%$color
+${color white}${top name 1} $alignr${top pid 1} ${top cpu 1}$color
+${color grey}${top name 2} $alignr${top pid 2} ${top cpu 2}
+${color grey}${top name 3} $alignr${top pid 3} ${top cpu 3}
 
-${color CC9900}MEMORY $hr $color
-${color CC9900}NAME $alignr PID	 MEM%$color
+MEMORY
+${color CC9900}NAME $alignr PID	MEM% $color
 ${top_mem name 1} $alignr${top_mem pid 1} ${top_mem mem 1}$color
 ${color grey}${top_mem name 2} $alignr${top_mem pid 2} ${top_mem mem 2}$color
 ${color grey}${top_mem name 3} $alignr${top_mem pid 3} ${top_mem mem 3}$color
-${color grey}${top_mem name 4} $alignr${top_mem pid 4} ${top_mem mem 4}$color
-${color grey}${top_mem name 5} $alignr${top_mem pid 5} ${top_mem mem 5}$color
 
-Used: ${mem}	$alignr ${color FF6600}Free: ${memfree}$color
  RAM: $memperc%  ${color FF6600} ${membar 6}$color
 Swap: $swapperc%   ${color FF6600} ${swapbar 6}$color
+Used: ${mem}	$alignr ${color FF6600}Free: ${memfree}$color
 
 ${color CC9900}DISK ${hr 2}$color
-Used: ${fs_used}/${fs_size} $alignr ${color yellow}Free: ${fs_free}$color
-Root: / ${color FFFF33} ${fs_bar 6 /} 
-$color/home: ${color FFFF35} ${fs_bar 6 /home} 
-${color CC9900}NETWORK eth0 (${addr eth0}) ${hr 2}$color
+${color yellow}/ $alignr ${fs_used_perc /}%  ${fs_bar 6,125 /}  
+$alignr ${color yellow}${fs_used /}/${fs_size //} - ${color green}${fs_free /} free$color
+${color yellow}/home $alignr ${fs_used_perc /home/}% ${fs_bar 6,125 /home} 
+$alignr ${color yellow}${fs_used /home}/${fs_size /home/} - ${color green}${fs_free /home} free$color
+${if_up wlan0}
+${color CC9900}NETWORK (wlan0) ${hr 2}$color
+${wireless_essid wlan0} ${color green} ${wireless_link_qual_perc wlan0}% ${wireless_link_bar 6 wlan0}$color
+IP: ${addr wlan0} | ${curl http://ifconfig.me/ip 3600} $color
+${color green}Download: (${tcp_portmon 1 65535 count}) $alignr ${color yellow}Upload $color
+${downspeedgraph wlan0 25,100 000000 00ff00} ${alignr}${upspeedgraph wlan0 25,100 000000 yellow}$color
+${color green}${downspeedf wlan0}KB/s $alignr ${color yellow}${upspeedf wlan0}KB/s$color
+$else
+${color CC9900}NETWORK eth0 ${hr 2}$color
+IP: ${addr eth0} | ${curl http://ifconfig.me/ip} $color
 Down: ${downspeed eth0} ${alignr}Up: ${upspeed eth0}
-${downspeedgraph eth0 25,100 000000 00ff00} ${alignr}${upspeedgraph eth0
-25,100 000000 ffff00}$color
+${downspeedgraph eth0 25,100 000000 00ff00} ${alignr}${upspeedgraph eth0 25,100 000000 ffff00}$color
+${color green}${downspeedf eth0}KB/s $alignr ${color yellow}${upspeedf eth0}KB/s$color
 Total: ${totaldown eth0} ${alignr}Total: ${totalup eth0}
-Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768
-61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}
-
+$endif
 ${color CC9800}LOG (syslog) ${hr 2}$color
-#${color 339900}${execi 60 tail -n10 /var/log/syslog| cut -d: -f 4-5 | sed 's/^ //;s/\(  \)\+//g' | fold -w33}$color
-${color 339900}${execi 60 tail -n10 /var/log/syslog| cut -d: -f 4-5 | sed 's/^ //;s/\s\s\+//g' | fold -w33}$color
+${color}${execi 100 journalctl -n 3 -b --no-pager | cut -d: -f 4-5 | sed 's/^ //;s/\(  \)\+//g' | fold -w30}$color

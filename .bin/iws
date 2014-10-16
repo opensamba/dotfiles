@@ -69,6 +69,8 @@ echo "Args: $@"
 	esac
 	shift
 done
+sudo ip link set wlan0 up
+sleep 1s
 for i in $(seq $COUNT);do
 	#sudo iwlist eth1 scan | grep -E "'"$FILTER"'"
 	sudo iwlist $IF scan | grep -E $FILTER | uniq

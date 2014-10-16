@@ -12,15 +12,19 @@
 #
 # wmnd &
 # wmsmixer -w &
-#/usr/lib/notification-daemon-1.0/notification-daemon 2>&1 >> /home/samba/notifications.log &
 #/usr/bin/statnot &
+#/usr/bin/notification-daemon &
 #xfce4-power-manager &
-xscreensaver -no-splash &
+#sudo /usr/bin/vendor_perl/spamd &
+batti &
 conky &
-~/.bin/mailcheck &
+nm-applet &
+xscreensaver -no-splash &
+udiskie -2&
+#~/.bin/mailcheck &
 # And last but not least we start fluxbox.
 # Because it is the last app you have to run it with ''exec'' before it.
 
 # exec fluxbox
 # or if you want to keep a log:
-exec fluxbox -log "/home/samba/.fluxbox/log"
+exec fluxbox -log "~/.fluxbox/log"

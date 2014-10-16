@@ -1,8 +1,9 @@
 
 script files
 ========
-Di seguito ci sono alcuni miei script e file di configurazione
-La maggior parte degli script sono fatti per semplificarmi la vita e non digitare troppi comandi per le cose che faccio piu' spesso.
+Following some of my script and config files
+the major of that script is just for automatation, to make life simple and stop to run same cmd 2 times.
+
 
 .bin/adatta :  manage fluxbox background
     - automatically resize background image to your resolution screen
@@ -21,7 +22,6 @@ La maggior parte degli script sono fatti per semplificarmi la vita e non digitar
     - if not specified set dns using google dns 8.8.8.8, 8.8.4.4
 
 
-
 .bin/iws: scan wireless and print essid
     - if specified print also auth, if has key, quality, chan
 
@@ -37,12 +37,16 @@ La maggior parte degli script sono fatti per semplificarmi la vita e non digitar
 conf files
 ========
 
-I file di configurazione sono preferenze che, dopo anni di test, ho plasmato secondo quello che mi piace.
-sono un minimalista quindi mi piace molto usare il terminale e la tastiera per quasi tutto quello che faccio.
+Config files are just my shared prefs of serveral app.
+After year testing I make it as I want and I think is good to share that.
 
-Sicuramente non sono preferenze statiche ma cambiaranno e si miglioreranno nel tempo 
-a seconda di quello che devo fare.
-Di seguito una breve descrizione:
+I am a minimalism person, so xterm, keyboard and shortcuts are my friends
+
+Obviously this prefs could change time to time.
+Is not static the way you like your pc, so git is also a good guy and can show me what change in the years
+
+
+Files:
 
 .config/gtk-3.0/settings.ini
 .gtkrc-2.0

@@ -1,8 +1,42 @@
 #!/bin/bash
 #Author: samba
 #Description: lock the system and stop some stuff
-
-#pidof rhythmbox && rhythmbox-client --pause &
-ncmpcpp pause
-xscreensaver-command -lock &
+#STATUS=$(grep "state: " $HOME/.mpd/mpd.state | awk '{print $2}')
+usage(){
+	echo "$0: Usage
+	-x|-exit)	exit  xscreensaver
+	-s|-start)	start xscreensaver
+	-d|-dark)	off the screen
+	-l|-lock)	lock xscreensaver
+	"
+}
+while [ $# -ne 0 ];do
+	case $1 in
+		-x|-exit)
+			xscreensaver-command -exit
+			xset -dpms
+			xset s off
+			/usr/bin/notify-send "xscreensaver disabled"
+		;;
+		-s|-start)
+			xscreensaver -no-splash &
+			/usr/bin/notify-send "xscreensaver enabled"
+		;;
+		-d|-dark)
+			xscreensaver-command -exit
+			xset s off
+			sleep 1
+			xset dpms force standby
+		;;
+		-l|-lock)
+			banshee --toggle-playing
+			PS=$(pgrep -c xscreensaver)
+			[ $PS -eq 0 ] && xscreensaver -no-splash  &
+			xscreensaver-command -lock 
+		;;
+		*) usage
+		;;
+	esac
+	shift
+done
 exit 0

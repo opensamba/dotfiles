@@ -1,7 +1,7 @@
 #!/bin/bash
 #Author: samba
 #Description: just get the dotfiles and remove sinsible datas
-MYDIR=$HOME/.dotfiles #type here your local dotfile repo
+MYDIR="$(dirname $0)/" #type here your local dotfile repo
 LISTFILE="
 .bashrc
 .procmailrc
@@ -48,10 +48,8 @@ LISTFILE="
 "
 
 for i in $LISTFILE;do
-	D=$(dirname $i)
-	[ ! -d ${MYDIR}/${D} ] && mkdir -p ${MYDIR}/${D}
-	cp -v ${HOME}/$i ${MYDIR}/${i}
-#	read # just to debug
+	[ ! -f $i ] && echo "E:404 - skip $i" && continue
+	cp -v ${HOME}/$i ${MYDIR}/$i
 done
 
 exit 0
