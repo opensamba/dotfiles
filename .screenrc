@@ -23,10 +23,11 @@ bind '}' history
 shell zsh
 nonblock on
 
-logfile /home/rpreziusi/.screenlog/screenlog%n_%Y-%m-%d.log
+logfile /home/samba/.screenlog/screenlog%n_%Y-%m-%d.log
 #deflog on  # only if you want to log every screen windows in a logfile
 
 # here comes the pain
-#caption string "%?%F%{= Bk}%? %C%A %D %d-%m-%Y %{= kB} %t%= %?%F%{= Bk}%:%{= wk}%? %n "
 hardstatus alwayslastline
-hardstatus string '%{= g}[%{= y}%H%{g}]%{= kw}%?   %-Lw%?%{r}(%{g}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%=%{g}[%{B}%Y-%m-%d %c]'
+hardstatus string '%{= g}[%{= y}%H%{g}]%{= kw}%?   %-Lw%?%{r}(%{g}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%=%{g}[%{b}%Y-%m-%d %c%{g}]'
+#testing this..
+#hardstatus string '%{=b y}%H%{= g}» %{= kw}%?   %-Lw%?%{r}(%{=u g}%n*%f%t%?(%u)%?%{= r})%{w}%?%+Lw%?%?%=%{g}[%{b}%Y-%m-%d %c%{g}]'
