@@ -3,9 +3,8 @@
 
 include "/home/samba/.gtkrc-2.0.mine"
 gtk-theme-name="Adwaita"
-gtk-icon-theme-name="Tangerine"
+gtk-icon-theme-name="oxygen"
 gtk-font-name="Sans 8"
-gtk-cursor-theme-name="Eclipse"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
 gtk-toolbar-icon-size=GTK_ICON_SIZE_SMALL_TOOLBAR
@@ -16,3 +15,4 @@ gtk-enable-input-feedback-sounds=0
 gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle="hintfull"
+gtk-xft-rgba="none"

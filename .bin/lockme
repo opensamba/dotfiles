@@ -29,7 +29,7 @@ while [ $# -ne 0 ];do
 			xset dpms force standby
 		;;
 		-l|-lock)
-			banshee --toggle-playing
+#			banshee --toggle-playing
 			PS=$(pgrep -c xscreensaver)
 			[ $PS -eq 0 ] && xscreensaver -no-splash  &
 			xscreensaver-command -lock 

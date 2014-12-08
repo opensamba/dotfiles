@@ -13,10 +13,8 @@ XTerm*cutNewline: false
 XTerm*eightBitControl: false
 XTerm*eightBitInput: true
 XTerm*externalBorder: 0
-XTerm*faceName: Bitstream DejaVu Sans Mono:pixelsize=13
-!XTerm*faceName: xft:Dejavu Sans Mono:pixelsize=11
-XTerm*faceNameDoubleSize: Bitstream DejaVu Sans Mono:pixelsize=13
-XTerm*faceSize: 13
+XTerm*faceName: Monospace:pixelsize=14
+XTerm*faceSize: 14
 !XTerm*foreground: grey75
 XTerm*foreground: lightgrey
 XTerm*fullscreen: never
@@ -31,12 +29,9 @@ XTerm*saveLines: 100000
 XTerm*scrollBar: false
 XTerm*showBlinkAsBold: true
 XTerm*termName: xterm
-!XTerm*termName: xterm-256color
 XTerm*trimSelection: true
 XTerm*utf8: 1
 XTerm.VT100.geometry: 89x29
 XTerm.eightBitOutput: true
 !XTterm*utf8: 2
 xcursor-theme: Eclipse
-!Xcursor-size: 16 	!  32, 48 or 64 may also be good values
-

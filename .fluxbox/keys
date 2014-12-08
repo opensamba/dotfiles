@@ -63,7 +63,6 @@ Mod4 k 			:Exec xterm -e "vim TODO"
 Mod4 shift u	:Exec xterm -e "mutt"
 Mod4 u			:Exec thunderbird
 Mod4 Shift t 	:Exec transmission-gtk
-Mod4 Shift d 	:Exec mysql-workbench
 #Mod4 Shift r 	:Exec xterm -e "screen -S rtorrent  rtorrent"
 Mod4 Shift i 	:Exec $HOME/.bin/startirc
 Mod4 Shift p    :Exec tomighty
@@ -79,10 +78,13 @@ Mod4 Shift c	:Exec xchat
 Mod4 Shift 3	:Exec conky
 Mod4 F9			:Exec pidgin
 Mod4 F10		:Exec skype
+Mod4 F12		:Exec scrot
 # change desktop
-Mod4 Shift a :Exec $HOME/.bin/adatta
+Mod4 Shift a :Exec $HOME/.bin/fbg --adapt
+Mod4 Shift s :Exec $HOME/.bin/fbg --show
+Mod4 Shift d :Exec $HOME/.bin/fbg --force --delete
 Mod4 m			:Exec fbsetbg -a -c -r $HOME/...
-Mod4 Shift m	:Exec fbsetbg -a -c -r $HOME/....
+Mod4 Shift m	:Exec fbsetbg -a -c -r $HOME/.she
 # open a dialog to run programs
 Mod1 F2 		:Exec fbrun
 Print           :Exec scrot "%s.png" -e 'eog $f'

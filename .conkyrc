@@ -71,7 +71,9 @@ ${offset 10}${color green}HOST: ${color }$nodename
 ${offset 10}${color green}KERN: ${color }$sysname $kernel
 ${offset 10}${color green}Batt: ${color }${battery_bar BAT0} 
 ${offset 10}${color green}Status: ${color}${battery BAT0} 
-${offset 10}${color green}Time: ${color }${battery_time BAT0}
+$if_empty ${color cyan}BGname: ${color} ${execi 100 "cat ~/.fehbg | awk '{print $NF}'"}
+$else ${offset 10}${color green}Time: ${color }${battery_time BAT0}
+
 ${color CC9900}CPU ${hr 2}$color
 Total CPU: 
 ${cpu cpu0}% $color1 ${cpubar cpu0} 

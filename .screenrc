@@ -28,6 +28,6 @@ logfile /home/samba/.screenlog/screenlog%n_%Y-%m-%d.log
 
 # here comes the pain
 hardstatus alwayslastline
-hardstatus string '%{= g}[%{= y}%H%{g}]%{= kw}%?   %-Lw%?%{r}(%{g}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%=%{g}[%{b}%Y-%m-%d %c%{g}]'
+hardstatus string '%{= g}[%{= y}%H%{g}]%{= kw}%?   %-Lw%?%{r}(%{g}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%=%{g}[%{y}%Y-%m-%d %c%{y}]'
 #testing this..
 #hardstatus string '%{=b y}%H%{= g}» %{= kw}%?   %-Lw%?%{r}(%{=u g}%n*%f%t%?(%u)%?%{= r})%{w}%?%+Lw%?%?%=%{g}[%{b}%Y-%m-%d %c%{g}]'

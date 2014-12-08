@@ -12,8 +12,6 @@ LISTFILE="
 .xscreensaver
 .pythonrc
 
-.gnupg/gpg.conf
-
 .gtkrc-2.0
 .gtkrc-2.0.mine
 .config/gtk-3.0/settings.ini
@@ -32,9 +30,10 @@ LISTFILE="
 .bin/get_wifi
 .bin/iws
 .bin/ddns
-.bin/adatta
+.bin/fbg
 .bin/song
 .bin/startirc
+.bin/open
 
 .sign
 .mutt/pgp
@@ -45,6 +44,7 @@ LISTFILE="
 .mutt/folderhooks
 .mutt/ignore
 .mutt/crypto
+
 
 "
 
