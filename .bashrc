@@ -52,14 +52,14 @@ fi
 alias ll='ls -lFh'
 alias la='ls -A'
 alias l='ls -CF --color=no'
-alias Update='sudo pacman -Syy '
-alias Aggiorna='sudo pacman -Su '
-alias Find='sudo pacman -Ss '
-alias Show='sudo pacman -Si'
-alias Install='sudo pacman -S '
-alias Remove='sudo pacman -R'
-alias d="sudo dhcpcd eth0"
-alias logall="journalctl -b -f"
+alias Update='sudo aptitude update'
+alias Aggiorna='sudo aptitude upgarde'
+alias Find='sudo aptitude search'
+alias Show='sudo aptitude show'
+alias Install='sudo aptitude install '
+alias Remove='sudo aptitude remove'
+alias d="sudo dhclient -v eth0"
+alias logall="journalctl -xf"
 alias sysc="sudo systemctl"
 #alias wrestart='sudo modprobe -r iwlagn && sudo modprobe  iwlagn'
 
@@ -71,7 +71,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # Set a local path to the script i wrote
-PATH="$PATH:~/.bin:~/.bin/Kasat"
+PATH="$PATH:~/.bin"
 # Set a path for autocomplete in python
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
